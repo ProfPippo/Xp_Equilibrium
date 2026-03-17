@@ -75,7 +75,7 @@
 {"nome":"Emilly Aparecida de Oliveira","ano":"9","xp":0,"nivel":1},
 {"nome":"Giovanni Felipe Garcia Oliveira","ano":"9","xp":0,"nivel":1},
 {"nome":"Gustavo Henrique da Silva","ano":"9","xp":0,"nivel":1},
-{"nome":"Isabella Ferreira Bueno","ano":"9","xp":0,"nivel":1:"fotos/isa.jpg"},
+{"nome":"Isabella Ferreira Bueno","ano":"9","xp":0,"nivel":1,foto:"fotos/isa.jpg"},
 {"nome":"Juan Pietro Carobrez Godoy Rodrigues","ano":"9","xp":0,"nivel":1},
 {"nome":"Julia Gallo Rezende","ano":"9","xp":0,"nivel":1},
 {"nome":"Luana Priscila Leite Souza","ano":"9","xp":0,"nivel":1},
