@@ -1,68 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>RPG Escolar</title>
-
-<style>
-body{
-  font-family:Arial;
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:30px;
-}
-
-input{
-  padding:10px;
-  width:300px;
-  border-radius:8px;
-  border:none;
-}
-
-button{
-  padding:10px 15px;
-  margin:10px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#22c55e;
-}
-
-.card{
-  margin-top:30px;
-  background:#1f2937;
-  padding:20px;
-  border-radius:12px;
-  display:inline-block;
-}
-
-.bar{
-  height:12px;
-  background:#374151;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-.fill{
-  height:100%;
-  background:#22c55e;
-}
-</style>
-</head>
-
-<body>
-
-<h1>⚔️ RPG Escolar</h1>
-
-<p>Digite seu nome:</p>
-
-<input id="busca" placeholder="Seu nome completo">
-<br>
-<button onclick="buscar()">Buscar</button>
-
-<div id="resultado"></div>
-
 <script>
 
 let dados=[];
@@ -74,18 +9,55 @@ async function carregar(){
 
 carregar();
 
+/* =========================
+   NORMALIZAR TEXTO
+========================= */
+function normalizar(txt){
+  return txt
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"");
+}
+
+/* =========================
+   BUSCA INTELIGENTE
+========================= */
 function buscar(){
 
-  const nome = busca.value.toLowerCase();
+  const termo = normalizar(busca.value);
 
-  const aluno = dados.find(a =>
-    a.nome.toLowerCase().includes(nome)
+  const resultados = dados.filter(a =>
+    normalizar(a.nome).includes(termo)
   );
 
-  if(!aluno){
+  if(resultados.length===0){
     resultado.innerHTML="<p>Aluno não encontrado</p>";
     return;
   }
+
+  // se tiver mais de um resultado
+  if(resultados.length > 1){
+
+    resultado.innerHTML = "<h3>Escolha seu nome:</h3>";
+
+    resultados.forEach(a=>{
+      resultado.innerHTML += `
+        <button onclick="mostrar(${a.nome.replace(/'/g,"\\'")})">
+          ${a.nome} (${a.ano}º)
+        </button><br>
+      `;
+    });
+
+    return;
+  }
+
+  mostrarAluno(resultados[0]);
+}
+
+/* =========================
+   MOSTRAR PERFIL
+========================= */
+function mostrarAluno(aluno){
 
   const pct = (aluno.xp/1000)*100;
 
@@ -105,7 +77,14 @@ function buscar(){
   `;
 }
 
-</script>
+/* =========================
+   CORRIGIR CLIQUE
+========================= */
+function mostrar(nome){
 
-</body>
-</html>
+  const aluno = dados.find(a => a.nome === nome);
+  mostrarAluno(aluno);
+
+}
+
+</script>
