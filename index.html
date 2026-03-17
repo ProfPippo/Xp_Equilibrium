@@ -1,89 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>RPG Escolar</title>
-
-<style>
-body{
-  font-family:Arial;
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:30px;
-}
-
-input{
-  padding:10px;
-  width:300px;
-  border-radius:8px;
-  border:none;
-}
-
-button{
-  padding:8px 12px;
-  margin:5px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#22c55e;
-}
-
-.card{
-  margin-top:30px;
-  background:#1f2937;
-  padding:20px;
-  border-radius:12px;
-  display:inline-block;
-  width:300px;
-}
-
-.foto{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-bottom:10px;
-  background:#333;
-}
-
-.bar{
-  height:12px;
-  background:#374151;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-.fill{
-  height:100%;
-  background:#22c55e;
-}
-</style>
-</head>
-
-<body>
-
-<h1>⚔️ RPG Escolar</h1>
-
-<p>Digite seu nome:</p>
-
-<input id="busca" placeholder="Seu nome completo">
-<br>
-<button onclick="buscar()">Buscar</button>
-
-<div id="resultado"></div>
-
 <script>
 
 let dados=[];
 
 async function carregar(){
-  try{
-    const r = await fetch("dados.json?"+Date.now());
-    dados = await r.json();
-  }catch{
-    dados = [];
-  }
+  const r=await fetch("dados.json?"+Date.now());
+  dados=await r.json();
 }
 
 carregar();
@@ -105,11 +26,6 @@ function buscar(){
 
   const termo = normalizar(busca.value);
 
-  if(!termo){
-    resultado.innerHTML="<p>Digite um nome</p>";
-    return;
-  }
-
   const resultados = dados.filter(a =>
     normalizar(a.nome).includes(termo)
   );
@@ -119,13 +35,14 @@ function buscar(){
     return;
   }
 
+  // se tiver mais de um resultado
   if(resultados.length > 1){
 
     resultado.innerHTML = "<h3>Escolha seu nome:</h3>";
 
     resultados.forEach(a=>{
       resultado.innerHTML += `
-        <button onclick="mostrar('${a.nome.replace(/'/g,"\\'")}')">
+        <button onclick="mostrar(${a.nome.replace(/'/g,"\\'")})">
           ${a.nome} (${a.ano}º)
         </button><br>
       `;
@@ -146,9 +63,6 @@ function mostrarAluno(aluno){
 
   resultado.innerHTML = `
     <div class="card">
-
-      <img src="${aluno.foto || ''}" class="foto">
-
       <h2>${aluno.nome}</h2>
       <p>${aluno.ano}º Ano</p>
 
@@ -164,7 +78,7 @@ function mostrarAluno(aluno){
 }
 
 /* =========================
-   CLIQUE NA LISTA
+   CORRIGIR CLIQUE
 ========================= */
 function mostrar(nome){
 
@@ -174,6 +88,3 @@ function mostrar(nome){
 }
 
 </script>
-
-</body>
-</html>
