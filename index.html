@@ -21,8 +21,8 @@ input{
 }
 
 button{
-  padding:10px 15px;
-  margin:10px;
+  padding:8px 12px;
+  margin:5px;
   border:none;
   border-radius:8px;
   cursor:pointer;
@@ -35,6 +35,16 @@ button{
   padding:20px;
   border-radius:12px;
   display:inline-block;
+  width:300px;
+}
+
+.foto{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+  background:#333;
 }
 
 .bar{
@@ -68,29 +78,77 @@ button{
 let dados=[];
 
 async function carregar(){
-  const r=await fetch("dados.json?"+Date.now());
-  dados=await r.json();
+  try{
+    const r = await fetch("dados.json?"+Date.now());
+    dados = await r.json();
+  }catch{
+    dados = [];
+  }
 }
 
 carregar();
 
+/* =========================
+   NORMALIZAR TEXTO
+========================= */
+function normalizar(txt){
+  return txt
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"");
+}
+
+/* =========================
+   BUSCA INTELIGENTE
+========================= */
 function buscar(){
 
-  const nome = busca.value.toLowerCase();
+  const termo = normalizar(busca.value);
 
-  const aluno = dados.find(a =>
-    a.nome.toLowerCase().includes(nome)
+  if(!termo){
+    resultado.innerHTML="<p>Digite um nome</p>";
+    return;
+  }
+
+  const resultados = dados.filter(a =>
+    normalizar(a.nome).includes(termo)
   );
 
-  if(!aluno){
+  if(resultados.length===0){
     resultado.innerHTML="<p>Aluno não encontrado</p>";
     return;
   }
+
+  if(resultados.length > 1){
+
+    resultado.innerHTML = "<h3>Escolha seu nome:</h3>";
+
+    resultados.forEach(a=>{
+      resultado.innerHTML += `
+        <button onclick="mostrar('${a.nome.replace(/'/g,"\\'")}')">
+          ${a.nome} (${a.ano}º)
+        </button><br>
+      `;
+    });
+
+    return;
+  }
+
+  mostrarAluno(resultados[0]);
+}
+
+/* =========================
+   MOSTRAR PERFIL
+========================= */
+function mostrarAluno(aluno){
 
   const pct = (aluno.xp/1000)*100;
 
   resultado.innerHTML = `
     <div class="card">
+
+      <img src="${aluno.foto || ''}" class="foto">
+
       <h2>${aluno.nome}</h2>
       <p>${aluno.ano}º Ano</p>
 
@@ -103,6 +161,16 @@ function buscar(){
       <p>${aluno.xp} / 1000 XP</p>
     </div>
   `;
+}
+
+/* =========================
+   CLIQUE NA LISTA
+========================= */
+function mostrar(nome){
+
+  const aluno = dados.find(a => a.nome === nome);
+  mostrarAluno(aluno);
+
 }
 
 </script>
