@@ -1,5 +1,5 @@
 [
-{"nome":"Alanis Vitória Couto Veloso","ano":"6","xp":545,"nivel":2},
+{"nome":"Alanis Vitória Couto Veloso","ano":"6","xp":545,"nivel":1},
 {"nome":"Ana Beatriz Banadia Brajão","ano":"6","xp":595,"nivel":1},
 {"nome":"Aysha Radyja Gaeta Donatangelo Teodoro de Godoy","ano":"6","xp":750,"nivel":1},
 {"nome":"Christopher da Silva Carvalho","ano":"6","xp":545,"nivel":1},
@@ -83,6 +83,7 @@
 {"nome":"Manuela Pereira Gomes","ano":"9","xp":615,"nivel":1},
 {"nome":"Paulo Manoel de Melo","ano":"9","xp":630,"nivel":1},
 {"nome":"Sara Vitória da Silva Panizza","ano":"9","xp":0,"nivel":1},
-{"nome":"Vinícius Aparecido Leme Ventura","ano":"9","xp":705,"nivel":1}
+{"nome":"Vinícius Aparecido Leme Ventura","ano":"9","xp":705,"nivel":1},
+{"nome":"Filippo Nanni","ano":"10","xp":999,"nivel":9}
   
 ]
