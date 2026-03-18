@@ -31,11 +31,17 @@ button{
 
 .card{
   margin-top:30px;
-  background:#1f2937;
   padding:20px;
   border-radius:12px;
   display:inline-block;
 }
+
+/* níveis */
+.nivel1{ background:#1f2937; } /* padrão */
+.nivel2{ background:#1e3a8a; } /* azul */
+.nivel3{ background:#6b21a8; } /* roxo */
+.nivel4{ background:#92400e; } /* dourado */
+.nivel5{ background:#065f46; } /* verde raro */
 
 .bar{
   height:12px;
@@ -114,6 +120,32 @@ function buscar(){
       <p>${aluno.xp} / 1000 XP</p>
     </div>
   `;
+let classeNivel = "nivel1";
+
+if(aluno.nivel >= 5){
+  classeNivel = "nivel5";
+}else if(aluno.nivel >= 4){
+  classeNivel = "nivel4";
+}else if(aluno.nivel >= 3){
+  classeNivel = "nivel3";
+}else if(aluno.nivel >= 2){
+  classeNivel = "nivel2";
+}
+
+resultado.innerHTML = `
+  <div class="card ${classeNivel}">
+    <h2>${aluno.nome}</h2>
+    <p>${aluno.ano}º Ano</p>
+
+    <h3>Nível ${aluno.nivel}</h3>
+
+    <div class="bar">
+      <div class="fill" style="width:${pct}%"></div>
+    </div>
+
+    <p>${aluno.xp} / 1000 XP</p>
+  </div>
+`;
 }
 
 </script>
