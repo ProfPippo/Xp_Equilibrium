@@ -55,6 +55,16 @@ button{
 .nivel4{ background:#ca8a04; } 
 .nivel5{ background:#FFD700; } 
 
+/* FOTO DO ALUNO */
+.foto{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+  border:3px solid white;
+}
+
 /* barra de xp */
 .bar{
   height:12px;
@@ -120,7 +130,6 @@ function buscar(){
 
   const pct = (aluno.xp/1000)*100;
 
-  // 🔥 define cor por nível
   let classeNivel = "nivel1";
 
   if(aluno.nivel >= 5){
@@ -135,6 +144,9 @@ function buscar(){
 
   resultado.innerHTML = `
     <div class="card ${classeNivel}">
+      
+      <img src="${aluno.foto ? aluno.foto : 'https://via.placeholder.com/100'}" class="foto">
+      
       <h2>${aluno.nome}</h2>
       <p>${aluno.ano}º Ano</p>
 
