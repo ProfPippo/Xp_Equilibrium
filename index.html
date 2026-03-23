@@ -45,14 +45,13 @@ button{
   justify-content:center;
   align-items:center;
   gap:20px;
-  margin-top:30px;
+  margin-top:20px;
 }
 
 /* card base */
 .card{
   padding:20px;
   border-radius:12px;
-  display:inline-block;
   color:white;
   min-width:250px;
 }
@@ -76,7 +75,7 @@ button{
 
 /* imagem especial */
 .especial{
-  width:200px;
+  width:140px;
   animation: flutuar 2s infinite ease-in-out;
 }
 
@@ -108,18 +107,32 @@ button{
 
 <p class="frase">HORA DE FARMAR SUA AURA!!!!!</p>
 
-<p>Digite seu nome COMPLETO:</p>
+<p>Digite seu nome (não precisa completo):</p>
 
-<input id="busca" placeholder="Seu nome completo">
-<br>
-<button onclick="buscar()">Buscar</button>
+<input id="busca" placeholder="Digite seu nome">
 
 <div id="resultado"></div>
 
 <script>
 
+/* =========================
+   VARIÁVEIS
+========================= */
 let dados=[];
 
+/* =========================
+   NORMALIZAR TEXTO
+========================= */
+function normalizar(txt){
+  return txt
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+/* =========================
+   CARREGAR DADOS
+========================= */
 async function carregar(){
   try{
     const r = await fetch("dados.json?"+Date.now());
@@ -132,69 +145,89 @@ async function carregar(){
 
 carregar();
 
+/* =========================
+   BUSCA INTELIGENTE
+========================= */
 function buscar(){
 
-  if(dados.length === 0){
-    resultado.innerHTML = "<p>Carregando dados... tente novamente</p>";
+  const termo = normalizar(busca.value);
+
+  if(termo.length < 2){
+    resultado.innerHTML = "<p>Digite pelo menos 2 letras...</p>";
     return;
   }
 
-  const nome = busca.value.toLowerCase();
-
-  const aluno = dados.find(a =>
-    a.nome.toLowerCase().includes(nome)
+  const encontrados = dados.filter(a =>
+    normalizar(a.nome).includes(termo)
   );
 
-  if(!aluno){
-    resultado.innerHTML="<p>Aluno não encontrado</p>";
+  if(encontrados.length === 0){
+    resultado.innerHTML = "<p>Aluno não encontrado</p>";
     return;
   }
 
-  const pct = (aluno.xp/1000)*100;
+  mostrarResultados(encontrados);
+}
 
-  let classeNivel = "nivel1";
+/* =========================
+   MOSTRAR RESULTADOS
+========================= */
+function mostrarResultados(listaAlunos){
 
-  if(aluno.nivel >= 5){
-    classeNivel = "nivel5";
-  } else if(aluno.nivel >= 4){
-    classeNivel = "nivel4";
-  } else if(aluno.nivel >= 3){
-    classeNivel = "nivel3";
-  } else if(aluno.nivel >= 2){
-    classeNivel = "nivel2";
-  }
+  resultado.innerHTML = "";
 
-  /* IMAGEM ESPECIAL */
-  let imagemEspecial = "";
+  listaAlunos.forEach(aluno => {
 
-  if(aluno.nivel >= 2 && aluno.especial){
-    imagemEspecial = `<img src="${aluno.especial}" class="especial">`;
-  }
+    const pct = (aluno.xp/1000)*100;
 
-  resultado.innerHTML = `
-    <div class="container">
+    let classeNivel = "nivel1";
 
-      ${imagemEspecial}
+    if(aluno.nivel >= 5){
+      classeNivel = "nivel5";
+    } else if(aluno.nivel >= 4){
+      classeNivel = "nivel4";
+    } else if(aluno.nivel >= 3){
+      classeNivel = "nivel3";
+    } else if(aluno.nivel >= 2){
+      classeNivel = "nivel2";
+    }
 
-      <div class="card ${classeNivel}">
-        
-        <img src="${aluno.foto ? aluno.foto : 'https://via.placeholder.com/100'}" class="foto">
-        
-        <h2>${aluno.nome}</h2>
-        <p>${aluno.ano}º Ano</p>
+    let imagemEspecial = "";
 
-        <h3>Nível ${aluno.nivel}</h3>
+    if(aluno.nivel >= 2 && aluno.especial){
+      imagemEspecial = `<img src="${aluno.especial}" class="especial">`;
+    }
 
-        <div class="bar">
-          <div class="fill" style="width:${pct}%"></div>
+    resultado.innerHTML += `
+      <div class="container">
+
+        ${imagemEspecial}
+
+        <div class="card ${classeNivel}">
+          
+          <img src="${aluno.foto ? aluno.foto : 'https://via.placeholder.com/100'}" class="foto">
+          
+          <h2>${aluno.nome}</h2>
+          <p>${aluno.ano}º Ano</p>
+
+          <h3>Nível ${aluno.nivel}</h3>
+
+          <div class="bar">
+            <div class="fill" style="width:${pct}%"></div>
+          </div>
+
+          <p>${aluno.xp} / 1000 XP</p>
         </div>
 
-        <p>${aluno.xp} / 1000 XP</p>
       </div>
-
-    </div>
-  `;
+    `;
+  });
 }
+
+/* =========================
+   BUSCA EM TEMPO REAL
+========================= */
+busca.addEventListener("input", buscar);
 
 </script>
 
