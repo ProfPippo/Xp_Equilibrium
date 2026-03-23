@@ -72,18 +72,18 @@
 {"nome":"Caio da Silva Francisco","ano":"9","xp":735,"nivel":1,"foto":"fotos/Caio_Silva.jpg.jpg"},
 {"nome":"Caio Rodrigues Mancinelli","ano":"9","xp":50,"nivel":2,"foto":"fotos/Caio_Mancinelli.jpg.jpg"},
 {"nome":"Davi Marques de Oliveira","ano":"9","xp":965,"nivel":1,"foto":"fotos/Davi_Marques.jpg.jpg"},
-{"nome":"Davi Silva Neres","ano":"9","xp":260,"nivel":2,"foto":"fotos/Davi_Silva.jpg.jpg"},
+{"nome":"Davi Silva Neres","ano":"9","xp":260,"nivel":2,"foto":"fotos/Davi_Silva.jpg.jpg","especial":"especial/Davi.jpg"},
 {"nome":"Emilly Aparecida de Oliveira","ano":"9","xp":680,"nivel":1,"foto":"fotos/Emilly.jpg.jpg"},
 {"nome":"Giovanni Felipe Garcia Oliveira","ano":"9","xp":805,"nivel":1,"foto":"fotos/Giovani.jpg.jpg"},
 {"nome":"Gustavo Henrique da Silva","ano":"9","xp":680,"nivel":1,"foto":"fotos/Gustavo_Henrique.jpg.jpg"},
-{"nome":"Isabella Ferreira Bueno","ano":"9","xp":490,"nivel":2,"foto":"fotos/Isa.jpg.jpeg"},
+{"nome":"Isabella Ferreira Bueno","ano":"9","xp":490,"nivel":2,"foto":"fotos/Isa.jpg.jpeg","especial":"especial/Isabella.jpg"},
 {"nome":"Juan Pietro Carobrez Godoy Rodrigues","ano":"9","xp":620,"nivel":1,"foto":"fotos/Juan.jpg.jpg"},
-{"nome":"Julia Gallo Rezende","ano":"9","xp":505,"nivel":2,"foto":"fotos/Julia.jpg.jpg"},
+{"nome":"Julia Gallo Rezende","ano":"9","xp":505,"nivel":2,"foto":"fotos/Julia.jpg.jpg","especial":"especial/Julia.jpg"},
 {"nome":"Luana Priscila Leite Souza","ano":"9","xp":560,"nivel":1,"foto":"fotos/Luana.jpg.jpeg"},
 {"nome":"Manuela Pereira Gomes","ano":"9","xp":965,"nivel":1,"foto":"fotos/Manuela.jpg.jpg"},
 {"nome":"Paulo Manoel de Melo","ano":"9","xp":30,"nivel":2,"foto":"fotos/Paulo.jpg.jpg"},
 {"nome":"Sara Vitória da Silva Panizza","ano":"9","xp":915,"nivel":1,"foto":"fotos/Sarah.jpg.jpeg"},
-{"nome":"Vinícius Aparecido Leme Ventura","ano":"9","xp":5,"nivel":2,"foto":"fotos/Vinicius_Leme.jpg.jpg"},
-{"nome":"Filippo Nanni","ano":"10","xp":999,"nivel":9,"foto":"fotos/filippo.jpg.png","especial":"especial/Davi.jpg"}
+{"nome":"Vinícius Aparecido Leme Ventura","ano":"9","xp":5,"nivel":2,"foto":"fotos/Vinicius_Leme.jpg.jpg","especial":"especial/Vinicius.jpg"},
+{"nome":"Filippo Nanni","ano":"10","xp":999,"nivel":9,"foto":"fotos/filippo.jpg.png"}
   
 ]
