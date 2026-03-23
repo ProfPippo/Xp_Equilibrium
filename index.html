@@ -29,16 +29,6 @@ input{
   border:none;
 }
 
-/* botão */
-button{
-  padding:10px 15px;
-  margin:10px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#22c55e;
-}
-
 /* container card + imagem */
 .container{
   display:flex;
@@ -48,45 +38,42 @@ button{
   margin-top:20px;
 }
 
-/* card base */
+/* card */
 .card{
   padding:20px;
   border-radius:12px;
-  color:white;
   min-width:250px;
 }
 
-/* cores por nível */
+/* níveis */
 .nivel1{ background:#1f2937; } 
 .nivel2{ background:#1e40af; } 
 .nivel3{ background:#7e22ce; } 
 .nivel4{ background:#ca8a04; } 
 .nivel5{ background:#FFD700; } 
 
-/* FOTO DO ALUNO */
+/* foto */
 .foto{
   width:100px;
   height:100px;
   border-radius:50%;
   object-fit:cover;
-  margin-bottom:10px;
   border:3px solid white;
 }
 
-/* imagem especial */
+/* especial */
 .especial{
   width:140px;
   animation: flutuar 2s infinite ease-in-out;
 }
 
-/* animação */
 @keyframes flutuar{
-  0%{ transform:translateY(0px); }
+  0%{ transform:translateY(0); }
   50%{ transform:translateY(-10px); }
-  100%{ transform:translateY(0px); }
+  100%{ transform:translateY(0); }
 }
 
-/* barra de xp */
+/* barra XP */
 .bar{
   height:12px;
   background:#374151;
@@ -107,9 +94,9 @@ button{
 
 <p class="frase">HORA DE FARMAR SUA AURA!!!!!</p>
 
-<p>Digite seu nome (não precisa completo):</p>
+<p>Digite seu nome:</p>
 
-<input id="busca" placeholder="Digite seu nome">
+<input id="busca" placeholder="Digite pelo menos 2 letras">
 
 <div id="resultado"></div>
 
@@ -118,7 +105,9 @@ button{
 /* =========================
    VARIÁVEIS
 ========================= */
-let dados=[];
+let dados = [];
+const resultado = document.getElementById("resultado");
+const inputBusca = document.getElementById("busca");
 
 /* =========================
    NORMALIZAR TEXTO
@@ -127,7 +116,8 @@ function normalizar(txt){
   return txt
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
 /* =========================
@@ -135,10 +125,10 @@ function normalizar(txt){
 ========================= */
 async function carregar(){
   try{
-    const r = await fetch("dados.json?"+Date.now());
+    const r = await fetch("dados.json?nocache=" + new Date().getTime());
     dados = await r.json();
   }catch(e){
-    document.body.innerHTML = "<h2>Erro ao carregar dados 😢</h2>";
+    resultado.innerHTML = "<h2>Erro ao carregar dados 😢</h2>";
     console.error(e);
   }
 }
@@ -146,11 +136,11 @@ async function carregar(){
 carregar();
 
 /* =========================
-   BUSCA INTELIGENTE
+   BUSCA
 ========================= */
 function buscar(){
 
-  const termo = normalizar(busca.value);
+  const termo = normalizar(inputBusca.value);
 
   if(termo.length < 2){
     resultado.innerHTML = "<p>Digite pelo menos 2 letras...</p>";
@@ -172,11 +162,11 @@ function buscar(){
 /* =========================
    MOSTRAR RESULTADOS
 ========================= */
-function mostrarResultados(listaAlunos){
+function mostrarResultados(lista){
 
   resultado.innerHTML = "";
 
-  listaAlunos.forEach(aluno => {
+  lista.forEach(aluno => {
 
     const pct = (aluno.xp/1000)*100;
 
@@ -205,7 +195,7 @@ function mostrarResultados(listaAlunos){
 
         <div class="card ${classeNivel}">
           
-          <img src="${aluno.foto ? aluno.foto : 'https://via.placeholder.com/100'}" class="foto">
+          <img src="${aluno.foto || 'https://via.placeholder.com/100'}" class="foto">
           
           <h2>${aluno.nome}</h2>
           <p>${aluno.ano}º Ano</p>
@@ -225,9 +215,9 @@ function mostrarResultados(listaAlunos){
 }
 
 /* =========================
-   BUSCA EM TEMPO REAL
+   EVENTO DE DIGITAÇÃO
 ========================= */
-busca.addEventListener("input", buscar);
+inputBusca.addEventListener("input", buscar);
 
 </script>
 
