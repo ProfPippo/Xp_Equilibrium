@@ -26,7 +26,7 @@
 {"nome":"Yasmim Mércia de Godoy Aguiar","ano":"6","xp":645,"nivel":1,"foto":"fotos/Yasmim_Mercia.jpg"},
 {"nome":"Arthur Miguel","ano":"6","xp":950,"nivel":1,"foto":"fotos/Arthur_Miguel.jpg"},
 
-{"nome":"Alice Alves Rodrigues","ano":"7","xp":45,"nivel":2,"foto":"fotos/Alice.jpg.jpg"},
+{"nome":"Alice Alves Rodrigues","ano":"7","xp":45,"nivel":2,"foto":"fotos/Alice.jpg.jpg","especial":"especial/Alice.jpg"},
 {"nome":"Ana Julia de Oliveira e Santos","ano":"7","xp":360,"nivel":2,"foto":"fotos/Ana_Julia.jpg.jpg","especial":"especial/Ana_Julia.jpg"},
 {"nome":"Enzo Raimundo da Silva Brandão","ano":"7","xp":720,"nivel":1,"foto":"fotos/Enzo.jpg.jpg"},
 {"nome":"Gabriel Stefano Campos Silva","ano":"7","xp":600,"nivel":1,"foto":"fotos/Gabriel.jpg.jpg"},
@@ -43,7 +43,7 @@
 {"nome":"Nara Souza Nunes","ano":"7","xp":780,"nivel":1,"foto":"fotos/Nara.jpg.jpg"},
 {"nome":"Rafaella Faralhi","ano":"7","xp":25,"nivel":2,"foto":"fotos/Rafaella.jpg.jpg","especial":"especial/Rafaella.jpg"},
 {"nome":"Renato Junior Petrillo Da Silva","ano":"7","xp":695,"nivel":1,"foto":"fotos/Renato.jpg.jpg"},
-{"nome":"Théo Henrique Lugli Ramos","ano":"7","xp":105,"nivel":2,"foto":"fotos/Theo.jpg.jpg"},
+{"nome":"Théo Henrique Lugli Ramos","ano":"7","xp":105,"nivel":2,"foto":"fotos/Theo.jpg.jpg","especial":"especial/Theo.jpg"},
 {"nome":"Thiago Grigorio da Silva","ano":"7","xp":675,"nivel":1,"foto":"fotos/Thiago.jpg.jpg"},
 {"nome":"Vinicius Gabriel Meira de Camargo","ano":"7","xp":525,"nivel":1,"foto":"fotos/Vinicius_Gabriel.jpg.jpg"},
 {"nome":"Vinicius Gonçalves Coelho","ano":"7","xp":425,"nivel":2,"foto":"fotos/Vinicius_Goncalves.jpg.jpg","especial":"especial/Vinicius_Goncalves.jpg"},
